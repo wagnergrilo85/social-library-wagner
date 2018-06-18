@@ -1,0 +1,78 @@
+<section class="content-header">
+    <h1>
+        Estudantes
+        <small>operações com estudantes</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a>
+        </li>
+        <li><a href="javascript:void(0)" routerLink="/student">Lista de estudantes</a></li>
+        <li class="active">Estudante</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="box">
+
+        <app-box-header-page [title]="'Lista de estudantes cadastradas'"></app-box-header-page>
+
+        <div class="box-body">
+
+            <div class="btn-group">
+                <button class="btn bg-purple" routerLink="/student/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <div class="row" *ngIf="messageAlert">
+                <app-message-alert [color]="colorAlert" [closeAlert]="true" [timeout]="40000">{{messageAlert}}
+                </app-message-alert>
+            </div>
+
+            <table datatable [dtOptions]="dtOptions" class="table table-bordered table-striped table-solteti table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Categoria</th>
+                        <th>Data de cadastro</th>
+                        <th>Status</th>
+                        <th class="th-action-solteti">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let student of students">
+
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.created_at.date | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{student.status == 1 ? 'Habilitado' : 'Desabilitado'}}</td>
+                    <td>
+                        <app-btn-action-table [id]="student.id" routeLinkPar="/student">
+                            <a href="javascript:void(0)" class="btn bg-navy  btn-xs" (click)="openModal(student)"> <i class="fa fa-fw fa-trash-o"></i> Apagar</a>
+                        </app-btn-action-table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>
+
+
+<app-modal>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Mensagem de confirmação</h4>
+    </div>
+    <div class="modal-body" *ngIf="currentModelToDelete">
+        <p>Deseja excluir este registro <strong>{{currentModelToDelete.name}}</strong> ?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-danger" (click)="destroy()">Exluir</button>
+    </div>
+</app-modal>

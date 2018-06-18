@@ -1,0 +1,62 @@
+<section class="content-header">
+    <h1>
+        Categorias
+        <small>operações de autores</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a> </li>
+        <li><a href="javascript:void(0)" routerLink="/category">Categorias</a></li>
+        <li class="active"> {{!category.id ? 'Nova categoria' : 'Editar categoria'}}</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box box-warning">
+
+        <app-box-header-page [title]="!category.id ? 'Cadastrar nova categoria' : 'Editar categoria'"></app-box-header-page>
+
+        <div class="box-body">
+
+            <div class="btn-group">
+                <button class="btn bg-purple" routerLink="/category/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+                <button class="btn bg-purple" [routerLink]="['/category', category.id, 'view']" *ngIf="category.id"><i class="fa fa-fw fa-eye"></i> Ver </button>
+                <button class="btn btn-danger" routerLink="/category"><i class="fa fa-fw fa-reply"></i> Voltar </button>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <div class="row">
+
+                <form (submit)="saveOrEdit(f)" #f="ngForm">
+
+                    <app-input [validateHasError]="!nameModel.valid && nameModel.touched">
+                        <label for="name" class="control-label">Categoria:</label>
+                        <input type="text" #nameModel="ngModel" id="name" name="name" class="form-control" placeholder="Nome da categoria" [(ngModel)]="category.name" ngDefaultControl required>
+                        <app-field-control-error
+                                [showErrorValidate]="!nameModel.valid && nameModel.touched"
+                                [messageError]="'Campo nome é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input>
+                        <label for="status" class="control-label">Status:</label>
+                        <select name="status" id="status" class="form-control" [(ngModel)]="category.status" ngDefaultControl>
+                            <option *ngFor="let status of arrayDataStatus" value="{{status.value}}"
+                                    [selected]="status.value === category.status"> {{status.label}}
+                            </option>
+                        </select>
+                    </app-input>
+
+                    <app-btn-submit-crud [validateForm]="!f.valid">
+                        {{!category.id ? 'Salvar dados ' : 'Editar dados'}}
+                    </app-btn-submit-crud>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</section>

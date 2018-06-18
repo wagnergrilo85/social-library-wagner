@@ -1,0 +1,108 @@
+<section class="content-header">
+    <h1>
+        Estudante
+        <small>operações de estudantes</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a>
+        </li>
+        <li><a href="javascript:void(0)" routerLink="/student">Estudantes</a></li>
+        <li class="active"> {{!student.id ? 'Novo estudante' : 'Visualizar estudante'}}</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box box-warning">
+
+        <app-box-header-page [title]="!student.id ? 'Cadastrar novo estudante' : 'Visualizar estudante'"></app-box-header-page>
+
+        <div class="box-body">
+
+            <div class="btn-group">
+                <button class="btn bg-purple" routerLink="/student/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+                <button class="btn bg-purple" [routerLink]="['/student', student.id, 'edit']" *ngIf="student.id"><i class="fa fa-fw fa-pencil"></i> Editar </button>
+                <button class="btn btn-danger" routerLink="/student"><i class="fa fa-fw fa-reply"></i> Voltar</button>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                <tr>
+                    <th>Coluna</th>
+                    <th>Dado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td> {{student.id}}</td>
+                </tr>
+                <tr>
+                    <th>Código interno</th>
+                    <td> {{student.internal_code}}</td>
+                </tr>
+                <tr>
+                    <th>Número matrícula</th>
+                    <td> {{student.registry}}</td>
+                </tr>
+                <tr>
+                    <th>Aluno</th>
+                    <td> {{student.name}}</td>
+                </tr>
+                <tr>
+                    <th> Nome do pai </th>
+                    <td> {{student.fathers_name}}</td>
+                </tr>
+                <tr>
+                    <th> Nome da  mãe </th>
+                    <td> {{student.mothers_name}}</td>
+                </tr>
+                <tr>
+                    <th> Celular </th>
+                    <td> {{student.cellphone}}</td>
+                </tr>
+
+                <tr>
+                    <th> Endereço </th>
+                    <td> {{student.address}}</td>
+                </tr>
+                <tr>
+                    <th> Número </th>
+                    <td> {{student.numberHouse}}</td>
+                </tr>
+                <tr>
+                    <th> Complemento </th>
+                    <td> {{student.complement}}</td>
+                </tr>
+                <tr>
+                    <th> Bairro </th>
+                    <td> {{student.neighborhood}}</td>
+                </tr>
+                <tr>
+                    <th> Cidade </th>
+                    <td> {{student.city}}</td>
+                </tr>
+
+                <tr>
+                    <th> Data de nascimento</th>
+                    <td> {{student.birthday | date:'dd/MM/yyyy' }}</td>
+                </tr>
+
+                <tr>
+                    <th> Data de cadastro</th>
+                    <td> {{student.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                </tr>
+                <tr>
+                    <th> Situação</th>
+                    <td> {{student.status == 1 ? 'Habilitado' : 'Desabilitado' }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>

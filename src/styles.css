@@ -1,0 +1,32 @@
+
+.table-solteti{
+    width: 100% !important;
+}
+
+.th-action-solteti{
+    width: 190px !important;
+    text-align: center;
+}
+
+.skin-purple-light .sidebar-menu > li:hover > a, .skin-purple-light .sidebar-menu > li.active > a {
+    color: #ecf0f5;
+    background: #605ca8;
+}
+
+.form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 83px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.mesageAlertFormInvalid{
+    font-size: 11px;
+    color: #dd4b39;
+}

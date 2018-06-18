@@ -1,0 +1,60 @@
+<section class="content-header">
+    <h1>
+        Autores
+        <small>operações de autores</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a> </li>
+        <li><a href="javascript:void(0)" routerLink="/category">Categorias</a></li>
+        <li class="active"> {{!category.id ? 'Nova categoria' : 'Visualizar categoria'}}</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box box-warning">
+
+        <app-box-header-page [title]="!category.id ? 'Cadastrar nova categoria' : 'Visualizar categoria'"></app-box-header-page>
+
+        <div class="box-body">
+
+            <div class="btn-group">
+                <button class="btn bg-purple" routerLink="/category/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+                <button class="btn bg-purple" [routerLink]="['/category', category.id, 'edit']" *ngIf="category.id"><i class="fa fa-fw fa-pencil"></i> Editar </button>
+                <button class="btn btn-danger" routerLink="/category"><i class="fa fa-fw fa-reply"></i> Voltar </button>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Coluna</th>
+                        <th>Dado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td> {{category.id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Categoria</th>
+                        <td> {{category.name}}</td>
+                    </tr>
+                    <tr>
+                        <th> Data de cadastro</th>
+                        <td> {{category.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    </tr>
+                    <tr>
+                        <th> Situação</th>
+                        <td> {{category.status == 1 ? 'Habilitado' : 'Desabilitado' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>

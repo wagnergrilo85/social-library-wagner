@@ -1,0 +1,69 @@
+    <section class="content-header">
+        <h1>
+            Autores
+            <small>operações de autores</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a></li>
+            <li><a href="javascript:void(0)" routerLink="/author">Autores</a></li>
+            <li class="active"> {{!author.id  ? 'Novo autor' : 'Editar autor'}} </li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="box box-warning">
+
+            <app-box-header-page [title]="!author.id ? 'Cadastrar novo autor' : 'Editar autor'"></app-box-header-page>
+
+            <div class="box-body">
+
+                <div class="btn-group">
+                    <button class="btn bg-purple" routerLink="/author/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+                    <button class="btn bg-purple" [routerLink]="['/author', author.id, 'view']" *ngIf="author.id"> <i class="fa fa-fw fa-eye"></i> Ver </button>
+                    <button class="btn btn-danger" routerLink="/author"><i class="fa fa-fw fa-reply"></i> Voltar</button>
+                </div>
+
+                <div class="clearfix"></div> <br>
+
+                <div class="row">
+
+                    <form (submit)="saveOrEdit(f)" #f="ngForm">
+
+                        <app-input [validateHasError]="!nameModel.valid && nameModel.touched">
+                            <label for="name" class="control-label">Autor:</label>
+                            <input type="text" #nameModel="ngModel" id="name" name="name" class="form-control" placeholder="Nome do autor" [(ngModel)]="author.name" required ngDefaultControl>
+                            <app-field-control-error
+                                    [showErrorValidate]="!nameModel.valid && nameModel.touched"
+                                    [messageError]="'Campo nome é obrigatório!'">
+                            </app-field-control-error>
+                        </app-input>
+
+                        <app-input [validateHasError]="!nationalityModel.valid && nationalityModel.touched">
+                            <label for="nationality" class="control-label">Nacionalidade:</label>
+                            <input type="text" #nationalityModel="ngModel" id="nationality" name="nationality" class="form-control" placeholder="Nacionalidade do autor" [(ngModel)]="author.nationality" ngDefaultControl required>
+                            <app-field-control-error
+                                    [showErrorValidate]="!nationalityModel.valid && nationalityModel.touched"
+                                    [messageError]="'Campo nacionalidade é obrigatório!'">
+                            </app-field-control-error>
+                        </app-input>
+
+                        <app-input>
+                            <label for="status" class="control-label">Status:</label>
+                            <select name="status" id="status" class="form-control" [(ngModel)]="author.status" ngDefaultControl>
+                                <option *ngFor="let status of arrayDataStatus" value="{{status.value}}" [selected]="status.value === author.status"> {{status.label}} </option>
+                            </select>
+                        </app-input>
+
+                        <app-btn-submit-crud [validateForm]="!f.valid">
+                            {{!author.id ? 'Salvar dados ' : 'Editar dados'}}
+                        </app-btn-submit-crud>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>

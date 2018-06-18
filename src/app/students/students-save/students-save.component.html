@@ -1,0 +1,163 @@
+<section class="content-header">
+    <h1>
+        Estudantes
+        <small>operações de estudantes</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a> </li>
+        <li><a href="javascript:void(0)" routerLink="/student">Estudantes</a></li>
+        <li class="active"> {{!student.id ? 'Nova estudante' : 'Editar estudante'}}</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box box-warning">
+
+        <app-box-header-page
+                [title]="!student.id ? 'Cadastrar novo estudante' : 'Editar estudante'"></app-box-header-page>
+
+        <div class="box-body">
+
+            <div class="btn-group">
+                <button class="btn bg-purple" routerLink="/student/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+                <button class="btn bg-purple" [routerLink]="['/student', student.id, 'view']" *ngIf="student.id"><i class="fa fa-fw fa-eye"></i> Ver </button>
+                <button class="btn btn-danger" routerLink="/student"><i class="fa fa-fw fa-reply"></i> Voltar</button>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <div class="row">
+
+                <form (submit)="saveOrEdit(f)" #f="ngForm">
+
+                    <app-input [validateHasError]="!nameModel.valid && nameModel.touched">
+                        <label for="name" class="control-label">Estudante:</label>
+                        <input type="text" #nameModel="ngModel" id="name" name="name" class="form-control" placeholder="Nome do estudante" [(ngModel)]="student.name"  required>
+                        <app-field-control-error
+                                [showErrorValidate]="!nameModel.valid && nameModel.touched"
+                                [messageError]="'Campo nome é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!fathersNameModel.valid && fathersNameModel.touched">
+                        <label for="fathers_name" class="control-label">Pai:</label>
+                        <input type="text" #fathersNameModel="ngModel" id="fathers_name" name="fathers_name" class="form-control" placeholder="Nome do pai" [(ngModel)]="student.fathers_name"  >
+                        <app-field-control-error
+                                [showErrorValidate]="!fathersNameModel.valid && fathersNameModel.touched"
+                                [messageError]="'Campo nome do pai é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!mothersNameModel.valid && mothersNameModel.touched">
+                        <label for="mothers_name" class="control-label">Mãe:</label>
+                        <input type="text" #mothersNameModel="ngModel" id="mothers_name" name="mothers_name" class="form-control" placeholder="Nome da mãe" [(ngModel)]="student.mothers_name"  required >
+                        <app-field-control-error
+                                [showErrorValidate]="!mothersNameModel.valid && mothersNameModel.touched"
+                                [messageError]="'Campo nome da mãe é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!cellphoneModel.valid && cellphoneModel.touched">
+                        <label for="cellphone" class="control-label">Celular:</label>
+                        <input type="text" #cellphoneModel="ngModel" id="cellphone" name="cellphone" class="form-control" placeholder="(xx)xxxxx-xxxx" [(ngModel)]="student.cellphone"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!cellphoneModel.valid && cellphoneModel.touched"
+                                [messageError]="'Campo celular é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!addressModel.valid && addressModel.touched">
+                        <label for="address" class="control-label">Endereço:</label>
+                        <input type="text" #addressModel="ngModel" id="address" name="address" class="form-control" placeholder="Informe o endereço" [(ngModel)]="student.address"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!addressModel.valid && addressModel.touched"
+                                [messageError]="'Campo endereço é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!numberHouseModel.valid && numberHouseModel.touched">
+                        <label for="numberHouse" class="control-label">Número:</label>
+                        <input type="number" #numberHouseModel="ngModel" id="numberHouse" name="numberHouse" class="form-control" placeholder="Informe o número" [(ngModel)]="student.numberHouse"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!numberHouseModel.valid && numberHouseModel.touched"
+                                [messageError]="'Campo número é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!complementModel.valid && complementModel.touched">
+                        <label for="complement" class="control-label">Complemento:</label>
+                        <input type="text" #complementModel="ngModel" id="complement" name="complement" class="form-control" placeholder="Informe o complemento" [(ngModel)]="student.complement"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!complementModel.valid && complementModel.touched"
+                                [messageError]="'Campo complemento é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!neighborhoodModel.valid && neighborhoodModel.touched">
+                        <label for="neighborhood" class="control-label">Bairro:</label>
+                        <input type="text" #neighborhoodModel="ngModel" id="neighborhood" name="neighborhood" class="form-control" placeholder="Informe o bairro" [(ngModel)]="student.neighborhood"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!neighborhoodModel.valid && neighborhoodModel.touched"
+                                [messageError]="'Campo bairro é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!cityModel.valid && cityModel.touched">
+                        <label for="city" class="control-label">Cidade:</label>
+                        <input type="text" #cityModel="ngModel" id="city" name="city" class="form-control" placeholder="Informe o cidade" [(ngModel)]="student.city"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!cityModel.valid && cityModel.touched"
+                                [messageError]="'Campo cidade é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!internalCodeModel.valid && internalCodeModel.touched">
+                        <label for="internal_code" class="control-label">Código interno:</label>
+                        <input type="text" #internalCodeModel="ngModel" id="internal_code" name="internal_code" class="form-control" placeholder="Informe o codido interno" [(ngModel)]="student.internal_code"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!internalCodeModel.valid && internalCodeModel.touched"
+                                [messageError]="'Campo código interno é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!registryModel.valid && registryModel.touched">
+                        <label for="registry" class="control-label">Número da matrícula:</label>
+                        <input type="text" #registryModel="ngModel" id="registry" name="registry" class="form-control" placeholder="Informe a matrícula" [(ngModel)]="student.registry"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!registryModel.valid && registryModel.touched"
+                                [messageError]="'Campo matrícula é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!birthdayModel.valid && birthdayModel.touched">
+                        <label for="birthday" class="control-label">Data de nascimento:</label>
+                        <input type="date" #birthdayModel="ngModel" id="birthday" name="birthday" class="form-control" placeholder="__/__/____" [(ngModel)]="student.birthday"   >
+                        <app-field-control-error
+                                [showErrorValidate]="!birthdayModel.valid && birthdayModel.touched"
+                                [messageError]="'Campo data de nascimento é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input>
+                        <label for="status" class="control-label">Status:</label>
+                        <select name="status" id="status" class="form-control" [(ngModel)]="student.status"
+                                ngDefaultControl>
+                            <option *ngFor="let status of arrayDataStatus" value="{{status.value}}"
+                                    [selected]="status.value === student.status"> {{status.label}}
+                            </option>
+                        </select>
+                    </app-input>
+
+                    <app-btn-submit-crud [validateForm]="!f.valid">
+                        {{!student.id ? 'Salvar dados ' : 'Editar dados'}}
+                    </app-btn-submit-crud>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</section>

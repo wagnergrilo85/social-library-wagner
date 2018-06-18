@@ -1,0 +1,90 @@
+<section class="content-header">
+    <h1>
+        Editoras
+        <small>operações de editoras</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0)" routerLink="/dashboard"><i class="fa fa-dashboard"></i> Painel de controle </a>
+        </li>
+        <li><a href="javascript:void(0)" routerLink="/publishing">Autores</a></li>
+        <li class="active"> {{!publishing.id ? 'Nova editora' : 'Editar editora'}}</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="box box-warning">
+
+        <app-box-header-page [title]="!publishing.id ? 'Cadastrar nova editora' : 'Editar editora'"></app-box-header-page>
+
+        <div class="box-body">
+
+            <div class="btn-group">
+                <button class="btn bg-purple" routerLink="/publishing/save"><i class="fa fa-fw fa-file"></i> Novo</button>
+                <button class="btn bg-purple" [routerLink]="['/publishing', publishing.id, 'view']" *ngIf="publishing.id"><i class="fa fa-fw fa-eye"></i> Ver </button>
+                <button class="btn btn-danger" routerLink="/publishing"><i class="fa fa-fw fa-reply"></i> Voltar</button>
+            </div>
+
+            <div class="clearfix"></div>
+            <br>
+
+            <div class="row">
+
+                <form (submit)="saveOrEdit(f)" #f="ngForm">
+
+                    <app-input [validateHasError]="!nameModel.valid && nameModel.touched">
+                        <label for="name" class="control-label">Nome editora:</label>
+                        <input type="text" #nameModel="ngModel" id="name" name="name" class="form-control" placeholder="Nome da editora" [(ngModel)]="publishing.name" required ngDefaultControl>
+                        <app-field-control-error
+                                [showErrorValidate]="!nameModel.valid && nameModel.touched"
+                                [messageError]="'Campo nome é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!websiteModel.valid && websiteModel.touched">
+                        <label for="website" class="control-label">Site:</label>
+                        <input type="text" #websiteModel="ngModel" id="website" name="website" class="form-control" placeholder="Site da editora" [(ngModel)]="publishing.website" ngDefaultControl>
+                        <app-field-control-error
+                                [showErrorValidate]="!websiteModel.valid && websiteModel.touched"
+                                [messageError]="'Campo site é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!emailModel.valid && emailModel.touched">
+                        <label for="email" class="control-label">E-mail:</label>
+                        <input type="email" #emailModel="ngModel" id="email" name="email" class="form-control" placeholder="email da editora" [(ngModel)]="publishing.email" ngDefaultControl email>
+                        <app-field-control-error
+                                [showErrorValidate]="!emailModel.valid && emailModel.touched"
+                                [messageError]="'Campo email é incorreto!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input [validateHasError]="!addressModel.valid && addressModel.touched">
+                        <label for="address" class="control-label">Endereço:</label>
+                        <input type="text" #addressModel="ngModel" id="address" name="address" class="form-control" placeholder="Endereço da editora" [(ngModel)]="publishing.address" ngDefaultControl >
+                        <app-field-control-error
+                                [showErrorValidate]="!addressModel.valid && addressModel.touched"
+                                [messageError]="'Campo endereço é obrigatório!'">
+                        </app-field-control-error>
+                    </app-input>
+
+                    <app-input>
+                        <label for="status" class="control-label">Status:</label>
+                        <select name="status" id="status" class="form-control" [(ngModel)]="publishing.status" ngDefaultControl>
+                            <option *ngFor="let status of arrayDataStatus" value="{{status.value}}"
+                                    [selected]="status.value === publishing.status"> {{status.label}}
+                            </option>
+                        </select>
+                    </app-input>
+
+                    <app-btn-submit-crud [validateForm]="!f.valid">
+                        {{!publishing.id ? 'Salvar dados ' : 'Editar dados'}}
+                    </app-btn-submit-crud>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</section>
