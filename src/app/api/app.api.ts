@@ -1,1 +1,1 @@
-export const API_BACK = "http://projects.solteti.com/library/api/v1";
+export const API_BACK = "http://projects.solteti.com/api/v1";
